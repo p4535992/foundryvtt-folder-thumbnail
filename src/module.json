@@ -1,0 +1,60 @@
+{
+  "name": "foundryvtt-folder-thumbnail",
+  "title": "Foundryvtt folder thumbnail",
+  "description": "Foundryvtt folder thumbnail",
+  "version": "0.0.1",
+  "author": "p4535992",
+  "type": "module",
+  "socket": true,
+  "includes": [
+    "./assets/**",
+    "./lang/**",
+    "./scripts/**",
+    "./styles/**",
+    "./templates/**",
+    "./module.json",
+    "./README.md",
+    "./icons/**",
+    "./packs/**"
+  ],
+  "media": [
+    {
+      "type": "icon",
+      "location": ""
+    },
+    {
+      "type": "cover",
+      "location": ""
+    },
+    {
+      "type": "screenshot",
+      "location": ""
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "system": ["dnd5e"],
+  "scripts": [],
+  "esmodules": ["foundryvtt-folder-thumbnail.js"],
+  "styles": ["styles/foundryvtt-folder-thumbnail.css"],
+  "minimumCoreVersion": "0.8.6",
+  "compatibleCoreVersion": "0.8.9",
+  "url": "https://github.com/p4535992/foundryvtt-folder-thumbnail",
+  "manifest": "https://github.com/p4535992/foundryvtt-folder-thumbnail/releases/latest/download/module.json",
+  "download": "https://github.com/p4535992/foundryvtt-folder-thumbnail/releases/download/v0.0.1/module.zip",
+  "readme": "https://github.com/p4535992/foundryvtt-folder-thumbnail/blob/v0.0.1/README.md",
+  "changelog": "https://github.com/p4535992/foundryvtt-folder-thumbnail/blob/v0.0.1/changelog.md",
+  "bugs": "https://github.com/p4535992/foundryvtt-folder-thumbnail/issues",
+  "allowBugReporter": true,
+  "manifestPlusVersion": "1.2.0",
+  "dependencies": [
+    {
+      "name": "lib-wrapper"
+    }
+  ]
+}
