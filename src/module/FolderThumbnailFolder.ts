@@ -154,12 +154,8 @@ export class FolderThumbnailFolder extends Folder {
     this.data.fontColorText = fc;
   }
 
-  get icon() {
+  get folderIcon() {
     return this.data.folderIcon;
-  }
-
-  set icon(i) {
-    this.folderIcon = i;
   }
 
   set folderIcon(i) {

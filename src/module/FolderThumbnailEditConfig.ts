@@ -8,7 +8,7 @@ export class FolderThumbnailEditConfig extends FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.id = 'folder-thumbnail-folder-edit';
-    options.template = `modules/${FOLDER_THUMBNAIL_MODULE_NAME}/templates/compendium-folder-edit.html`;
+    options.template =  `modules/${FOLDER_THUMBNAIL_MODULE_NAME}/templates/folder-thumbnail-edit.html`,
     options.width = 500;
     return options;
   }
@@ -30,45 +30,27 @@ export class FolderThumbnailEditConfig extends FormApplication {
       submitText: i18n(this.isEditDialog ? 'FOLDER.Update' : 'FOLDER.Create'),
       defaultFolder: this.object._id === 'default',
       deleteText: this.isEditDialog && this.object._id != 'default' ? 'Delete Folder' : null,
+      folderIcon: this.object.data.folderIcon,
     };
   }
 
   /** @override */
   async _updateObject(event, formData) {
-    if (!formData.parent) formData.parent = null;
+    if ( !formData.parent ) formData.parent = null;
 
-    this.object.name = formData.name;
-    if (formData.color.length === 0) {
-      this.object.color = '#000000';
+    if (formData.folderIcon != null) {
+        if (formData.folderIcon.length == 0) {
+            this.object.data.folderIcon = null;
+        } else {
+            this.object.data.folderIcon = formData.folderIcon;
+        }
     } else {
-      this.object.color = formData.color;
+        this.object.data.folderIcon = null;
     }
-    if (formData.fontColor.length === 0) {
-      this.object.fontColor = '#FFFFFF';
-    } else {
-      this.object.fontColor = formData.fontColor;
+    if ( !this.object.id ) {
+        this.object.data.update(formData);
+        return Folder.create(this.object.data);
     }
-    if (formData.icon != null) {
-      if (formData.icon.length == 0) {
-        this.object.folderIcon = null;
-      } else {
-        this.object.folderIcon = formData.icon;
-      }
-    } else {
-      this.object.folderIcon = null;
-    }
-
-    if (!this.object.id) {
-      this.object.data.update(formData);
-      return Folder.create(this.object.data);
-    }
-
-    // if (this.object._id != 'default'){
-
-    // }
-
-    await this.object.save();
-
     return this.object.update(formData);
   }
 
