@@ -19,6 +19,7 @@ export class FolderThumbnailFolder extends Folder {
           parent: null,
           pathToFolder: [],
           folderIcon: null,
+          folderIconOpen: null,
           expanded: false,
         },
         data,

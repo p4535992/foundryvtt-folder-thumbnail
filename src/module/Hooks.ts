@@ -3,34 +3,8 @@ import { FolderThumbnailEditConfig } from './FolderThumbnailEditConfig';
 import { FOLDER_THUMBNAIL_MODULE_NAME, getGame } from './settings';
 
 export const readyHooks = async () => {
-  Hooks.on('renderActorDirectory', async function (args) {
-    //
-  });
-
-  Hooks.on('renderItemDirectory', async function (args) {
-    //
-  });
-
-  Hooks.on('renderJournalDirectory', async function (args) {
-    //
-  });
-
-  Hooks.on('renderPlaylistDirectory', async function (args) {
-    //
-  });
-
-  Hooks.on('renderRollTableDirectory', async function (args) {
-    //
-  });
-
-  Hooks.on('renderSceneDirectory', async function (args) {
-    //
-  });
-
-  Hooks.on('renderMacroDirectory', async function (args) {
-    //
-  });
-};
+  //
+}
 
 export const setupHooks = async () => {
   // setup all the hooks
@@ -83,6 +57,65 @@ export const setupHooks = async () => {
   //   SceneDirectoryPrototypeGetFolderContextOptions,
   //   'MIXED',
   // );
+
+  Hooks.on('renderActorDirectory', async function (app, html:JQuery<HTMLElement>) {
+    // $('.sidebar-tab').each(function() {
+      // const list = $(this).find('.directory-list');
+      const list = html.find('.directory-list');
+      if (list.length) {
+          list.children().each(function() {
+              // if(($(this).hasClass('folder')) && $(this).hasClass('folder-icon')) {
+              if(($(this).hasClass('folder'))) {
+                  const idFolder = $(this).attr('data-folder-id');
+                  const folder = getGame().folders?.find((f:Folder) => f.id == idFolder);
+                  // const folderIcon = folder?.data.folderIcon;
+                  const folderIcon = folder?.getFlag(FOLDER_THUMBNAIL_MODULE_NAME,'folderIcon');
+                  const folderIconOpen = folder?.getFlag(FOLDER_THUMBNAIL_MODULE_NAME,'folderIconOpen');
+                  //@ts-ignore
+                  if(!folder?.expanded && folderIcon){
+                    const targetIcon:JQuery<HTMLElement> = $(this).find('.folder-header h3 i');
+                    // .css('folder-icon');
+                    const thumbnail = `<img class="folder-icon" src="${folderIcon}" alt="Folder Icon Thumbnail">`;
+                    targetIcon.replaceWith(thumbnail);
+                    //el.css('background-color', bgColor);
+                    //el.find('.subdirectory')
+                    //.css('border-color', bgColor);
+                    // el.addClass('folder-icon');
+                  }else if(folder?.expanded && folderIconOpen){
+                    const targetIcon:JQuery<HTMLElement> = $(this).find('.folder-header h3 i');
+                    // .css('folder-icon');
+                    const thumbnail = `<img class="folder-icon" src="${folderIconOpen}" alt="Folder Icon Thumbnail">`;
+                    targetIcon.replaceWith(thumbnail);
+                  }
+              }
+          });
+      }
+    // });
+  });
+
+  Hooks.on('renderItemDirectory', async function (app, html) {
+    //
+  });
+
+  Hooks.on('renderJournalDirectory', async function (app, html) {
+    //
+  });
+
+  Hooks.on('renderPlaylistDirectory', async function (app, html) {
+    //
+  });
+
+  Hooks.on('renderRollTableDirectory', async function (app, html) {
+    //
+  });
+
+  Hooks.on('renderSceneDirectory', async function (app, html) {
+    //
+  });
+
+  Hooks.on('renderMacroDirectory', async function (app, html) {
+    //
+  });
 };
 
 export const initHooks = () => {

@@ -14,23 +14,27 @@ export class FolderThumbnailEditConfig extends FormApplication {
   }
 
   get title() {
-    return this.isEditDialog ? `${i18n('FOLDER.Update')}: ${this.object.name}` : i18n('FOLDER.Create');
+    //return this.isEditDialog ? `${i18n('FOLDER.Update')}: ${this.object.name}` : i18n('FOLDER.Create');
+    return this.object.id ? `${i18n('FOLDER.Update')}: ${this.object.name}` : i18n('FOLDER.Create');
   }
 
   /** @override */
   async getData(options): Promise<any> {
-    // const allPacks = this.getGroupedPacks();
+    const folder = getGame().folders?.find((f:Folder) => f.id == this.object.id);
+    const folderIcon = folder?.getFlag(FOLDER_THUMBNAIL_MODULE_NAME,'folderIcon');
+    const folderIconOpen = folder?.getFlag(FOLDER_THUMBNAIL_MODULE_NAME,'folderIconOpen');
     return {
       name: this.object.id ? this.object.name : '',
       newName: i18nFormat('ENTITY.New', { entity: i18n(Folder.metadata.label) }),
       folder: this.object.data,
       safeColor: this.object.data.color ?? '#000000',
       sortingModes: { a: 'FOLDER.SortAlphabetical', m: 'FOLDER.SortManual' },
-      // submitText: i18n(this.object.id ? "FOLDER.Update" : "FOLDER.Create"),
-      submitText: i18n(this.isEditDialog ? 'FOLDER.Update' : 'FOLDER.Create'),
+      submitText: i18n(this.object.id ? "FOLDER.Update" : "FOLDER.Create"),
+    //   submitText: i18n(this.isEditDialog ? 'FOLDER.Update' : 'FOLDER.Create'),
       defaultFolder: this.object._id === 'default',
       deleteText: this.isEditDialog && this.object._id != 'default' ? 'Delete Folder' : null,
-      folderIcon: this.object.data.folderIcon,
+      folderIcon: folderIcon,
+      folderIconOpen: folderIconOpen,
     };
   }
 
@@ -47,10 +51,29 @@ export class FolderThumbnailEditConfig extends FormApplication {
     } else {
         this.object.data.folderIcon = null;
     }
+
+    if (formData.folderIconOpen != null) {
+        if (formData.folderIconOpen.length == 0) {
+            this.object.data.folderIconOpen = null;
+        } else {
+            this.object.data.folderIconOpen = formData.folderIconOpen;
+        }
+    } else {
+        this.object.data.folderIconOpen = null;
+    }
+
     if ( !this.object.id ) {
         this.object.data.update(formData);
         return Folder.create(this.object.data);
     }
+
+    // await this.object.save();
+    // return;
+
+    const folder = getGame().folders?.find((f:Folder) => f.id == this.object.id);
+    await folder?.setFlag(FOLDER_THUMBNAIL_MODULE_NAME,'folderIcon',this.object.data.folderIcon);
+    await folder?.setFlag(FOLDER_THUMBNAIL_MODULE_NAME,'folderIconOpen',this.object.data.folderIconOpen);
+
     return this.object.update(formData);
   }
 

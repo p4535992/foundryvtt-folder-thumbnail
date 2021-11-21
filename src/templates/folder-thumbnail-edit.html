@@ -28,9 +28,18 @@
         <label>{{localize "foundryvtt-folder-thumbnail.folderIcon"}}</label>
         <div class="form-fields">
             {{filePicker target="folderIcon" type="image"}}
-            <input class="image" type="text" name="folderIcon" placeholder="default folder" value="{{folder.folderIcon}}"/>
+            <input class="image" type="text" name="folderIcon" placeholder="default folder image" value="{{folder.folderIcon}}"/>
         </div>
     </div>
     <img src="{{folder.folderIcon}}" data-edit="img" title="{{folder.name}}" height="64" width="64"/>
+
+    <div class="form-group">
+        <label>{{localize "foundryvtt-folder-thumbnail.folderIconOpen"}}</label>
+        <div class="form-fields">
+            {{filePicker target="folderIconOpen" type="image"}}
+            <input class="image" type="text" name="folderIconOpen" placeholder="default folder image open" value="{{folder.folderIconOpen}}"/>
+        </div>
+    </div>
+    <img src="{{folder.folderIconOpen}}" data-edit="img" title="{{folder.name}}" height="64" width="64"/>
     <button type="submit"><i class="fas fa-check"></i> {{submitText}}</button>
 </form>
