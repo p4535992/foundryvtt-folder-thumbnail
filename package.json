@@ -1,8 +1,8 @@
 {
   "private": true,
   "name": "foundryvtt-folder-thumbnail",
-  "title": "Riddle One",
-  "description": "Riddle One",
+  "title": "Foundryvtt folder thumbnail",
+  "description": "Foundryvtt folder thumbnail",
   "version": "0.0.1",
   "scripts": {
     "package": "gulp package",

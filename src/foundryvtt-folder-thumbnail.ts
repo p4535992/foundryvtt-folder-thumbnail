@@ -16,6 +16,7 @@ import { getGame, registerSettings } from './module/settings';
 import { preloadTemplates } from './module/preloadTemplates';
 import { FOLDER_THUMBNAIL_MODULE_NAME } from './module/settings';
 import { initHooks, readyHooks, setupHooks } from './module/Hooks';
+import { FolderThumbnailEditConfig } from './module/FolderThumbnailEditConfig';
 // import { installedModules, setupModules } from './module/setupModules';
 
 export let debugEnabled = 0;
@@ -90,3 +91,25 @@ Hooks.once('ready', () => {
 });
 
 // Add any additional hooks if necessary
+
+//@ts-ignore
+SceneDirectory.prototype._getFolderContextOptions = function newSceneFolderContext() {
+  //@ts-ignore
+  const options = SidebarDirectory.prototype._getFolderContextOptions.call(this);
+  return [
+    {
+      name: 'FOLDER.Edit',
+      icon: '<i class="fas fa-edit"></i>',
+      condition: getGame().user?.isGM,
+      callback: (header) => {
+        const li = header.parent()[0];
+        const folder = <Folder>getGame().folders?.get(li.dataset.folderId);
+        const options = {
+          top: li.offsetTop,
+          left: window.innerWidth - 310 - <number>FolderConfig.defaultOptions.width,
+        };
+        new FolderThumbnailEditConfig(folder, options).render(true);
+      },
+    },
+  ].concat(options);
+};
