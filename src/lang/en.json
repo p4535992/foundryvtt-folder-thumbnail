@@ -1,4 +1,7 @@
 {
-  "foundryvtt-folder-thumbnail.folderIcon": "Folder Icon",
-  "foundryvtt-folder-thumbnail.folderIconOpen": "Folder Icon Open"
+  "foundryvtt-folder-thumbnail.folderIcon": "Folder Image",
+  "foundryvtt-folder-thumbnail.folderIconOpen": "Folder Image Open",
+  "foundryvtt-folder-thumbnail.folderIconFontAwesome": "Folder Icon",
+  "foundryvtt-folder-thumbnail.folderIconFontAwesomeOpen": "Folder Icon Open",
+  "foundryvtt-folder-thumbnail.folderIconUseIconInsteadImage": "Use icon instead of image"
 }

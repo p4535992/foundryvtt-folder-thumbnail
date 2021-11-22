@@ -24,22 +24,49 @@
         </div>
     </div>
 
+    <!-- Module Folder Icon Thumbnail -->
+
+    <div class="form-group">
+        <label>{{localize "foundryvtt-folder-thumbnail.folderIconUseIconInsteadImage"}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="folderIconUseIconInsteadImage" value="{{folderIconUseIconInsteadImage}}"/>
+        </div>
+    </div>
+
     <div class="form-group">
         <label>{{localize "foundryvtt-folder-thumbnail.folderIcon"}}</label>
         <div class="form-fields">
             {{filePicker target="folderIcon" type="image"}}
-            <input class="image" type="text" name="folderIcon" placeholder="default folder image" value="{{folder.folderIcon}}"/>
+            <input class="image" type="text" name="folderIcon" placeholder="default folder image" value="{{folderIcon}}"/>
         </div>
     </div>
-    <img src="{{folder.folderIcon}}" data-edit="img" title="{{folder.name}}" height="64" width="64"/>
+    <img src="{{folderIcon}}" data-edit="img" height="64" width="64"/>
 
     <div class="form-group">
         <label>{{localize "foundryvtt-folder-thumbnail.folderIconOpen"}}</label>
         <div class="form-fields">
             {{filePicker target="folderIconOpen" type="image"}}
-            <input class="image" type="text" name="folderIconOpen" placeholder="default folder image open" value="{{folder.folderIconOpen}}"/>
+            <input class="image" type="text" name="folderIconOpen" placeholder="default folder image open" value="{{folderIconOpen}}"/>
         </div>
     </div>
-    <img src="{{folder.folderIconOpen}}" data-edit="img" title="{{folder.name}}" height="64" width="64"/>
+    <img src="{{folderIconOpen}}" data-edit="img" height="64" width="64"/>
+
+    <div class="form-group">
+        <label>{{localize "foundryvtt-folder-thumbnail.folderIconFontAwesome"}}</label>
+        <div class="form-fields">
+            {{filePicker target="folderIconFontAwesome" type="image"}}
+            <input class="image" type="text" name="folderIconFontAwesome" placeholder="default folder icon" value="{{folderIconFontAwesome}}"/>
+        </div>
+    </div>
+    <i class="fas {{folderIconFontAwesome}} fa-fw" height="64" width="64"></i>
+
+    <div class="form-group">
+        <label>{{localize "foundryvtt-folder-thumbnail.folderIconFontAwesomeOpen"}}</label>
+        <div class="form-fields">
+            {{filePicker target="folderIconFontAwesomeOpen" type="image"}}
+            <input class="image" type="text" name="folderIconFontAwesomeOpen" placeholder="default folder icon open" value="{{folderIconFontAwesomeOpen}}"/>
+        </div>
+    </div>
+    <i class="fas {{folderIconFontAwesomeOpen}} fa-fw" height="64" width="64"></i>
     <button type="submit"><i class="fas fa-check"></i> {{submitText}}</button>
 </form>
